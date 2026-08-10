@@ -17,6 +17,10 @@ jobs:
     needs: lint
     uses: ./.github/workflows/build.yml
 
+  test:
+    needs: build
+    uses: ./.github/workflows/tests.yml
+
   release:
     if: startsWith(github.ref, 'refs/tags/')
     needs: build

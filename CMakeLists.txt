@@ -6,6 +6,7 @@ set(PROJECT_VESRION 0.0.${PATCH_VERSION})
 project(helloworld VERSION ${PROJECT_VESRION})
 
 option(WITH_BOOST_TEST "Whether to build Boost test" ON)
+option(WITH_GTEST "Whether to build GoogleTests tests" ON)
 
 configure_file(version.h.in version.h)
 
@@ -45,6 +46,28 @@ if(WITH_BOOST_TEST)
     )
 endif()
 
+if(WITH_GTEST)
+    find_package(GTest REQUIRED)
+
+    add_executable(gtest_version tests/version_test.cpp)
+
+    set_target_properties(gtest_version PROPERTIES
+        CXX_STANDARD 14
+        CXX_STANDARD_REQUIRED ON
+    )
+
+    target_include_directories(gtest_version PRIVATE
+        "${CMAKE_CURRENT_SOURCE_DIR}"
+    )
+
+    target_link_libraries(gtest_version PRIVATE
+        GTest::gtest_main
+        helloworld
+    )
+
+    target_compile_options(gtest_version PRIVATE -Wall -Wextra -pedantic -Werror)
+endif()
+
 if (MSVC)
     target_compile_options(helloworld_cli PRIVATE
         /W4
@@ -80,7 +103,13 @@ set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
 set(CPACK_PACKAGE_CONTACT example@example.com)
 include(CPack)
 
+enable_testing()
+
 if(WITH_BOOST_TEST)
-    enable_testing()
-    add_test(test_version test_version)
+    add_test(NAME test_version COMMAND test_version)
 endif()
+
+if(WITH_GTEST)
+    add_test(NAME gtest_version COMMAND gtest_version)
+endif()
+

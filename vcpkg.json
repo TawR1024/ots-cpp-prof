@@ -1,0 +1,5 @@
+{
+    "name":"hw1.setup-ci",
+    "version": "1.0.0",
+    "dependencies":["gtest"]
+}
