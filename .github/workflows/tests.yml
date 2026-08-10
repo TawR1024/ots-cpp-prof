@@ -22,7 +22,7 @@ jobs:
         run: $VCPKG_ROOT/bootstrap-vcpkg.sh
 
       - name: Configure
-        run: cmake -B build -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake -DWITH_BOOST_TEST=OFF
+        run: cmake -B build -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake -DWITH_BOOST_TEST=OFF -DWITH_GTEST=ON
 
       - name: Build
         run: cmake --build build
