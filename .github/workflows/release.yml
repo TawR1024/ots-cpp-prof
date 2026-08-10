@@ -1,20 +1,13 @@
-name: 'C++ CI'
+name: 'Release'
 
 on:
-  push:
-    branches:
-      - master
-      - 'hw*/*'
-    tags:
-      - 'v*.*.*'
+  workflow_call:
 
 jobs:
   release:
-    if: startsWith(github.ref, 'refs/tags/')
-    needs: [lint, build]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: true
       - name: Set version from tag

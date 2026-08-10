@@ -1,18 +1,13 @@
-name: 'build project'
+name: 'Build project'
 
 on:
-  push:
-    branches:
-      - master
-      - 'hw*/*'
-    tags:
-      - 'v*.*.*'
+  workflow_call:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: true
       - run: sudo apt-get update && sudo apt-get install libboost-test-dev -y

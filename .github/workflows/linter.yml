@@ -1,11 +1,6 @@
 name: 'Clang-format'
 
 on:
-  push:
-    branches:
-      - master
-      - 'hw*/*'
-  pull_request:
   workflow_call:
 
 jobs:
