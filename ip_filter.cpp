@@ -44,6 +44,57 @@ std::ostream& operator<< (std::ostream& os, const IPv4Adress& ip)
     return os << std::get<0> (ip) << "." << std::get<1> (ip) << "." << std::get<2> (ip) << "." << std::get<3> (ip);
 }
 
+std::vector<IPv4Adress> filter_any (const std::vector<IPv4Adress>& input, uint32_t filter)
+{
+    std::vector<IPv4Adress> filtered;
+    for (const auto& ip : input)
+    {
+        if (std::get<0> (ip) == filter || std::get<1> (ip) == filter || std::get<2> (ip) == filter ||
+            std::get<3> (ip) == filter)
+        {
+            filtered.push_back (ip);
+        }
+    }
+
+    return filtered;
+}
+
+std::vector<IPv4Adress> filter_1 (const std::vector<IPv4Adress>& input, uint32_t filter)
+{
+    std::vector<IPv4Adress> filtered;
+    for (const auto& ip : input)
+    {
+        if (std::get<0> (ip) == filter)
+        {
+            filtered.push_back (ip);
+        }
+    }
+
+    return filtered;
+}
+
+std::vector<IPv4Adress> filter_12 (const std::vector<IPv4Adress>& input, uint32_t pos_1_f, uint32_t pos_2_f)
+{
+    std::vector<IPv4Adress> filtered;
+    for (const auto& ip : input)
+    {
+        if (std::get<0> (ip) == pos_1_f && std::get<1> (ip) == pos_2_f)
+        {
+            filtered.push_back (ip);
+        }
+    }
+
+    return filtered;
+}
+
+void print (std::vector<IPv4Adress> ip_pool)
+{
+    for (auto ip = ip_pool.cbegin (); ip != ip_pool.cend (); ++ip)
+    {
+        std::cout << *ip << std::endl;
+    }
+}
+
 int main (int argc, char const* argv[])
 {
     try
@@ -57,34 +108,12 @@ int main (int argc, char const* argv[])
         }
 
         // TODO reverse lexicographically sort
-
-        // for (auto ip = ip_pool.cbegin (); ip != ip_pool.cend (); ++ip)
-        // {
-        //     for (auto ip_part = ip->cbegin (); ip_part != ip->cend (); ++ip_part)
-        //     {
-        //         if (ip_part != ip->cbegin ())
-        //         {
-        //             std::cout << ".";
-        //         }
-        //         std::cout << *ip_part;
-        //     }
-        //     std::cout << std::endl;
-        // }
-        for (auto ip = ip_pool.cbegin (); ip != ip_pool.cend (); ++ip)
-        {
-            std::cout << *ip << std::endl;
-        }
-
-        // 222.173.235.246
-        // 222.130.177.64
-        // 222.82.198.61
-        // ...
-        // 1.70.44.170
-        // 1.29.168.152
-        // 1.1.234.8
+        std::sort (ip_pool.begin (), ip_pool.end (), std::greater<>{});
+        print (ip_pool);
 
         // TODO filter by first byte and output
         // ip = filter(1)
+        print (filter_1 (ip_pool, 1));
 
         // 1.231.69.33
         // 1.87.203.225
@@ -94,6 +123,7 @@ int main (int argc, char const* argv[])
 
         // TODO filter by first and second bytes and output
         // ip = filter(46, 70)
+        print (filter_12 (ip_pool, 46, 70));
 
         // 46.70.225.39
         // 46.70.147.26
@@ -102,6 +132,7 @@ int main (int argc, char const* argv[])
 
         // TODO filter by any byte and output
         // ip = filter_any(46)
+        print (filter_any (ip_pool, 46));
 
         // 186.204.34.46
         // 186.46.222.194
