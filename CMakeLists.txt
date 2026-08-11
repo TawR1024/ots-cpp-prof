@@ -1,12 +1,14 @@
 cmake_minimum_required(VERSION 4.2)
 
-set(PROJECT_NAME_SAFE "default_project")
+set(PROJECT_NAME_SAFE "hw2-ip-filter")
 
 project(${PROJECT_NAME_SAFE})
 
-add_executable(${PROJECT_NAME_SAFE} main.cpp)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-set_target_properties(${ROJECT_NAME_SAFE} PROPERTIES
+add_executable(${PROJECT_NAME_SAFE} ip_filter.cpp)
+
+set_target_properties(${PROJECT_NAME_SAFE} PROPERTIES
     CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
 )
