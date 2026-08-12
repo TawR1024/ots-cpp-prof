@@ -1,12 +1,12 @@
-name: 'Validate and Build'
+name: "Validate and Build"
 
 on:
   push:
     branches:
-      - master
-      - 'hw*/*'
+      - masters
+      - "hw*/*"
     tags:
-      - 'v*.*.*'
+      - "v*.*.*"
   pull_request:
 
 jobs:
@@ -17,11 +17,16 @@ jobs:
     needs: lint
     uses: ./.github/workflows/build.yml
 
+  test:
+    if: false # disable for testing
+    needs: build
+    uses: ./.github/workflows/tests.yml
+
   release:
     if: startsWith(github.ref, 'refs/tags/')
     needs: build
     uses: ./.github/workflows/release.yml
     with:
-      package_name: hw1-setup-ci
+      package_name: hw2-ip-filter
     permissions:
       contents: write

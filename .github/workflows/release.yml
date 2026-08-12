@@ -1,4 +1,4 @@
-name: 'Release'
+name: "Release"
 
 on:
   workflow_call:
@@ -14,15 +14,19 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: true
-      - run: sudo apt-get update && sudo apt-get install libboost-test-dev -y
-      - run: cmake . -DPATCH_VERSION=${{ github.run_number }} -DWITH_BOOST_TEST=ON
-      - run: cmake --build .
-      - run: cmake --build . --target package
-      
+
+      - name: Build and package
+        run: |
+          TAG="${{ github.ref_name }}"
+          VERSION="${TAG#v}-${{ github.run_number }}"
+          echo "Building version: $VERSION"
+          cmake -B build -DPACKAGE_VERSION="$VERSION"
+          cmake --build build
+          cmake --build build --target package
       - name: Set package filename
         id: pkg
         run: |
-          SRC=$(ls *.deb)
+          SRC=$(ls build/*.deb)
           DST="${{ inputs.package_name }}-${{ github.ref_name }}-${{ github.run_number }}.deb"
           mv "$SRC" "$DST"
           echo "FILE=$DST" >> $GITHUB_OUTPUT

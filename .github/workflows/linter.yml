@@ -1,4 +1,4 @@
-name: 'Clang-format'
+name: "Clang-format"
 
 on:
   workflow_call:
