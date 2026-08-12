@@ -73,7 +73,8 @@ std::vector<IPv4Address> filter_by_first (const std::vector<IPv4Address>& input,
     return filtered;
 }
 
-std::vector<IPv4Address> filter_by_first_and_second (const std::vector<IPv4Address>& input, uint32_t byte0f, uint32_t byte1f)
+std::vector<IPv4Address> filter_by_first_and_second (const std::vector<IPv4Address>& input, uint32_t byte0f,
+                                                     uint32_t byte1f)
 {
     std::vector<IPv4Address> filtered;
     for (const auto& ip : input)
