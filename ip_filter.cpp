@@ -1,10 +1,11 @@
 #include <cassert>
+#include <cstdint>
 #include <cstdlib>
 #include <iostream>
 #include <string>
 #include <vector>
 
-typedef std::tuple<uint32_t, uint32_t, uint32_t, uint32_t> IPv4Address;
+typedef std::tuple<std::uint32_t, std::uint32_t, std::uint32_t, std::uint32_t> IPv4Address;
 
 // ("",  '.') -> [""]
 // ("11", '.') -> ["11"]
