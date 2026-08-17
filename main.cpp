@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 
 #include "ip_filter.hpp"
@@ -14,7 +15,6 @@ int main (int argc, char const* argv[])
             ip_pool.push_back (string_to_IPv4 (v.at (0)));
         }
 
-        // TODO reverse lexicographically sort
         std::sort (ip_pool.begin (), ip_pool.end (), std::greater<>{});
         print (ip_pool);
         std::cout << std::endl;
@@ -30,7 +30,6 @@ int main (int argc, char const* argv[])
         // 1.29.168.152
         // 1.1.234.8
 
-        // TODO filter by first and second bytes and output
         // ip = filter(46, 70)
         print (filter_by_first_and_second (ip_pool, 46, 70));
         std::cout << std::endl;
@@ -40,7 +39,6 @@ int main (int argc, char const* argv[])
         // 46.70.113.73
         // 46.70.29.76
 
-        // TODO filter by any byte and output
         // ip = filter_any(46)
         print (filter_any (ip_pool, 46));
         std::cout << std::endl;
