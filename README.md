@@ -1,0 +1,1 @@
+[![Validate and Build](https://github.com/TawR1024/ots-cpp-prof/actions/workflows/ci.yml/badge.svg)](https://github.com/TawR1024/ots-cpp-prof/actions/workflows/ci.yml)
