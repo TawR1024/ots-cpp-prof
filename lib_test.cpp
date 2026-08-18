@@ -1,9 +1,8 @@
-#include <gtest/gtest.h>
+#include "lib.hpp"
 
+#include <gtest/gtest.h>
 class lib_test : public ::testing::Test
 {
-}
+};
 
-TEST_F (lib_test, test_template)
-{
-}
+TEST_F (lib_test, test_template) { EXPECT_NO_THROW (template_method ()); };
