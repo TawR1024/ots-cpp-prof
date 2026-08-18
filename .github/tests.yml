@@ -1,0 +1,32 @@
+name: "Run Tests"
+
+on:
+    workflow_call:
+
+env:
+    VCPKG_ROOT: ${{ github.workspace }}/vcpkg
+
+jobs:
+    run_tests:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v6
+
+            - name: Install vcpkg
+              uses: actions/checkout@v6
+              with:
+                  repository: microsoft/vcpkg
+                  path: vcpkg
+
+            - name: Bootstrap vcpkg
+              run: $VCPKG_ROOT/bootstrap-vcpkg.sh
+
+            - name: Configure
+              run: cmake -B build -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake -DWITH_BOOST_TEST=OFF -DWITH_GTEST=ON
+
+            - name: Build
+              run: cmake --build build
+
+            - name: Test
+              working-directory: build
+              run: ctest --output-on-failure

@@ -1,1 +1,7 @@
-int main () { return 0; }
+#include "lib.hpp"
+
+int main ()
+{
+    template_method ();
+    return 0;
+}
