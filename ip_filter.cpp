@@ -27,71 +27,64 @@ std::vector<std::string> split (const std::string& str, char d)
     r.push_back (str.substr (start));
 
     return r;
-}
+};
 
-IPv4Address string_to_IPv4 (const std::string str)
-{
-    auto        parts = split (str, '.');
-    IPv4Address ip =
-        std::make_tuple (std::stoi (parts[0]), std::stoi (parts[1]), std::stoi (parts[2]), std::stoi (parts[3]));
-    return ip;
-}
+// std::vector<IPv4Address> filter_any (const std::vector<IPv4Address>& input, uint32_t filter)
+// {
+//     std::vector<IPv4Address> filtered;
+//     for (const auto& ip : input)
+//     {
+//         if (std::get<0> ((ip.address)) == filter || std::get<1> ((ip.address)) == filter ||
+//             std::get<2> ((ip.address)) == filter || std::get<3> ((ip.address)) == filter)
+//         {
+//             filtered.push_back (ip);
+//         }
+//     }
 
-std::vector<IPv4Address> filter_any (const std::vector<IPv4Address>& input, uint32_t filter)
-{
-    std::vector<IPv4Address> filtered;
-    for (const auto& ip : input)
-    {
-        if (std::get<0> (ip) == filter || std::get<1> (ip) == filter || std::get<2> (ip) == filter ||
-            std::get<3> (ip) == filter)
-        {
-            filtered.push_back (ip);
-        }
-    }
+//     return filtered;
+// }
 
-    return filtered;
-}
+// std::vector<IPv4Address> filter_by_first (const std::vector<IPv4Address>& input, uint32_t filter)
+// {
+//     std::vector<IPv4Address> filtered;
+//     for (const auto& ip : input)
+//     {
+//         if (std::get<0> (ip.address) == filter)
+//         {
+//             filtered.push_back (ip);
+//         }
+//     }
 
-std::vector<IPv4Address> filter_by_first (const std::vector<IPv4Address>& input, uint32_t filter)
-{
-    std::vector<IPv4Address> filtered;
-    for (const auto& ip : input)
-    {
-        if (std::get<0> (ip) == filter)
-        {
-            filtered.push_back (ip);
-        }
-    }
+//     return filtered;
+// }
 
-    return filtered;
-}
+// std::vector<IPv4Address> filter_by_first_and_second (const std::vector<IPv4Address>& input, uint32_t byte0f,
+//                                                      uint32_t byte1f)
+// {
+//     std::vector<IPv4Address> filtered;
+//     for (const auto& ip : input)
+//     {
+//         if (std::get<0> (ip.address) == byte0f && std::get<1> (ip.address) == byte1f)
+//         {
+//             filtered.push_back (ip);
+//         }
+//     }
 
-std::vector<IPv4Address> filter_by_first_and_second (const std::vector<IPv4Address>& input, uint32_t byte0f,
-                                                     uint32_t byte1f)
-{
-    std::vector<IPv4Address> filtered;
-    for (const auto& ip : input)
-    {
-        if (std::get<0> (ip) == byte0f && std::get<1> (ip) == byte1f)
-        {
-            filtered.push_back (ip);
-        }
-    }
+//     return filtered;
+// }
 
-    return filtered;
-}
-
-void print (const std::vector<IPv4Address>& ip_pool)
-{
-    for (auto ip = ip_pool.cbegin (); ip != ip_pool.cend (); ++ip)
-    {
-        if (ip != ip_pool.cbegin ())
-            std::cout << "\n";
-        std::cout << *ip;
-    }
-}
+// void print (const std::vector<IPv4Address>& ip_pool)
+// {
+//     for (auto ip = ip_pool.cbegin (); ip != ip_pool.cend (); ++ip)
+//     {
+//         if (ip != ip_pool.cbegin ())
+//             std::cout << "\n";
+//         std::cout << *ip;
+//     }
+// }
 
 std::ostream& operator<< (std::ostream& os, const IPv4Address& ip)
 {
-    return os << std::get<0> (ip) << "." << std::get<1> (ip) << "." << std::get<2> (ip) << "." << std::get<3> (ip);
+    return os << std::get<0> (ip.address) << "." << std::get<1> ((ip.address)) << "." << std::get<2> ((ip.address))
+              << "." << std::get<3> ((ip.address));
 }

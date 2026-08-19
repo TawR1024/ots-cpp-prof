@@ -12,16 +12,16 @@ int main (int argc, char const* argv[])
         for (std::string line; std::getline (std::cin, line);)
         {
             std::vector<std::string> v = split (line, '\t');
-            ip_pool.push_back (string_to_IPv4 (v.at (0)));
+            ip_pool.push_back (IPv4Address (v.at (0)));
         }
 
-        std::sort (ip_pool.begin (), ip_pool.end (), std::greater<>{});
-        print (ip_pool);
-        std::cout << std::endl;
+        // std::sort (ip_pool.begin (), ip_pool.end (), std::greater<>{});
+        // print (ip_pool);
+        // std::cout << std::endl;
 
         // TODO filter by first byte and output
         // ip = filter(1)
-        print (filter_by_first (ip_pool, 1));
+        // print (filter_by_first (ip_pool, 1));
         std::cout << std::endl;
 
         // 1.231.69.33
@@ -31,7 +31,7 @@ int main (int argc, char const* argv[])
         // 1.1.234.8
 
         // ip = filter(46, 70)
-        print (filter_by_first_and_second (ip_pool, 46, 70));
+        // print (filter_by_first_and_second (ip_pool, 46, 70));
         std::cout << std::endl;
 
         // 46.70.225.39
@@ -40,7 +40,7 @@ int main (int argc, char const* argv[])
         // 46.70.29.76
 
         // ip = filter_any(46)
-        print (filter_any (ip_pool, 46));
+        // print (filter_any (ip_pool, 46));
         std::cout << std::endl;
 
         // 186.204.34.46
@@ -81,6 +81,7 @@ int main (int argc, char const* argv[])
     catch (const std::exception& e)
     {
         std::cerr << e.what () << std::endl;
+        return -1;
     }
 
     return 0;
