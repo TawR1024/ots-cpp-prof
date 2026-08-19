@@ -11,8 +11,7 @@ AllowShortLoopsOnASingleLine: false
 
 ColumnLimit: 120
 
-SpaceBeforeParens: Always
-SpaceInEmptyParentheses: false
+
 SpaceAfterCStyleCast: true
 
 SortIncludes: true
