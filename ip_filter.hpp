@@ -35,11 +35,35 @@ class IPv4Address
         address = std::make_tuple (parce (parts[0]), parce (parts[1]), parce (parts[2]), parce (parts[3]));
     }
     bool operator== (const IPv4Address& other) const { return address == other.address; }
+    bool operator< (const IPv4Address& other) const { return address < other.address; }
+    bool operator> (const IPv4Address& other) const { return address > other.address; }
 };
 
-// std::vector<IPv4Address> filter_any (const std::vector<IPv4Address>& input, uint32_t filter);
-// std::vector<IPv4Address> filter_by_first (const std::vector<IPv4Address>& input, uint32_t filter);
-// std::vector<IPv4Address> filter_by_first_and_second (const std::vector<IPv4Address>& input, uint32_t byte0f,
-//                                                      uint32_t byte1f);
-void          print (const std::vector<IPv4Address>& ip_pool);
-std::ostream& operator<< (std::ostream& os, const IPv4Address& ip);
+template <typename... Filter>
+std::vector<IPv4Address> filter (const std::vector<IPv4Address>& input, Filter... filters)
+{
+    std::array<std::uint32_t, sizeof...(Filter)> filters_arr{static_cast<std::uint32_t> (filters)...};
+
+    auto matches = [&] (const IPv4Address& ip)
+    {
+        for (std::size_t i = 0; i < filters_arr.size (); ++i)
+        {
+            auto octet = (i == 0)   ? std::get<0> (ip.address)
+                         : (i == 1) ? std::get<1> (ip.address)
+                         : (i == 2) ? std::get<2> (ip.address)
+                                    : std::get<3> (ip.address);
+            if (octet != filters_arr[i])
+                return false;
+        }
+        return true;
+    };
+
+    std::vector<IPv4Address> filtered;
+    for (const auto& ip : input)
+        if (matches (ip))
+            filtered.push_back (ip);
+    return filtered;
+}
+std::vector<IPv4Address> filter_any (const std::vector<IPv4Address>& input, uint32_t value);
+void                     print (const std::vector<IPv4Address>& ip_pool);
+std::ostream&            operator<< (std::ostream& os, const IPv4Address& ip);
