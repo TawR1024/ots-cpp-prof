@@ -13,6 +13,7 @@ ColumnLimit: 120
 
 
 SpaceAfterCStyleCast: true
+SpaceBeforeParens: Always
 
 SortIncludes: true
 IncludeCategories:
