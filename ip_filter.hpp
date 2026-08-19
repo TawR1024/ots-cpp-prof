@@ -1,5 +1,6 @@
 #pragma once
 
+#include <array>
 #include <cstdint>
 #include <cstdlib>
 #include <ostream>
@@ -14,7 +15,7 @@ class IPv4Address
    public:
     std::tuple<std::uint32_t, std::uint32_t, std::uint32_t, std::uint32_t> address;
 
-    IPv4Address () : address (0, 0, 0, 0){};
+    IPv4Address () : address (0, 0, 0, 0) {};
     IPv4Address (std::uint32_t a, std::uint32_t b, std::uint32_t c, std::uint32_t d)
         : address (a, b, c, d) {}  // for tests without validation
 
