@@ -3,23 +3,23 @@
 
 #include "ip_filter.hpp"
 
-int main (int argc, char const* argv[])
+int main(int argc, char const* argv[])
 {
     try
     {
         std::vector<IPv4Address> ip_pool;
 
-        for (std::string line; std::getline (std::cin, line);)
+        for (std::string line; std::getline(std::cin, line);)
         {
-            std::vector<std::string> v = split (line, '\t');
-            ip_pool.push_back (IPv4Address (v.at (0)));
+            std::vector<std::string> v = split(line, '\t');
+            ip_pool.push_back(IPv4Address(v.at(0)));
         }
 
-        std::sort (ip_pool.begin (), ip_pool.end (), std::greater<>{});
-        print (ip_pool);
+        std::sort(ip_pool.begin(), ip_pool.end(), std::greater<>{});
+        print(ip_pool);
         std::cout << std::endl;
 
-        print (filter (ip_pool, 1));
+        print(filter(ip_pool, 1));
         std::cout << std::endl;
 
         // 1.231.69.33
@@ -28,7 +28,7 @@ int main (int argc, char const* argv[])
         // 1.29.168.152
         // 1.1.234.8
 
-        print (filter (ip_pool, 46, 70));
+        print(filter(ip_pool, 46, 70));
         std::cout << std::endl;
 
         // 46.70.225.39
@@ -36,7 +36,7 @@ int main (int argc, char const* argv[])
         // 46.70.113.73
         // 46.70.29.76
 
-        print (filter_any (ip_pool, 46));
+        print(filter_any(ip_pool, 46));
         std::cout << std::endl;
 
         // 186.204.34.46
@@ -76,7 +76,7 @@ int main (int argc, char const* argv[])
     }
     catch (const std::exception& e)
     {
-        std::cerr << e.what () << std::endl;
+        std::cerr << e.what() << std::endl;
         return -1;
     }
 
