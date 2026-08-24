@@ -1,1 +1,0 @@
-void template_method ();

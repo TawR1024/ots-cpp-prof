@@ -1,5 +1,5 @@
 {
-    "name":"template-project",
-    "version": "0.0.0",
+    "name":"hw3-custom-allocator",
+    "version": "3.0.0",
     "dependencies":["gtest"]
 }

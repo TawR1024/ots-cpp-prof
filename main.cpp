@@ -1,7 +1,7 @@
-#include "lib.hpp"
+#include "custom_allocator.hpp"
 
 int main ()
 {
-    template_method ();
+    // TODO: add custom allocator usage example
     return 0;
 }

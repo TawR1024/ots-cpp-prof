@@ -27,6 +27,6 @@ jobs:
     needs: build
     uses: ./.github/workflows/release.yml
     with:
-      package_name: hw2-ip-filter
+      package_name: hw3-custom-allocator
     permissions:
       contents: write
