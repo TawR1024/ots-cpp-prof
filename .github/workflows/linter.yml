@@ -28,4 +28,6 @@ jobs:
           find . -type f \( -name '*.cpp' -o -name '*.hpp' -o -name '*.h' \) \
             -not -path './build/*' \
             -not -path './.git/*' \
+            -not -path './.cache/*' \
+            -not -path './vcpkg_installed/*' \
             | xargs clang-format-21 --dry-run --Werror

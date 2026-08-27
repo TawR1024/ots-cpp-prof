@@ -15,22 +15,28 @@ class PoolAllocator
         if (!pool_)
             throw std::bad_alloc;
     }
-    ~PoolAllocator() {
-        if(is_owner_){
-            ::operator delete(pool_);
+    ~PoolAllocator ()
+    {
+        if (is_owner_)
+        {
+            ::operator delete (pool_);
         }
     }
 
-    T *allocate(std::size_t size) {
-        if (size !=1 ||offset_ >= N) {
+    T* allocate (std::size_t size)
+    {
+        if (size != 1 || offset_ >= N)
+        {
             throw std::bad_alloc;
-        }else {
+        }
+        else
+        {
             return pool_[offset_++];
         }
     }
 
-    void deallocate(T*, std::size_t) noexcept {
+    void deallocate (T*, std::size_t) noexcept
+    {
         // cannot deallocate for 1 element
     }
-
 };
