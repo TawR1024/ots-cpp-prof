@@ -1,47 +1,88 @@
 #pragma once
+#include <algorithm>
 #include <cstddef>
 #include <cstdlib>
+#include <iterator>
 #include <memory>
 #include <new>
 #include <stdexcept>
 
-template <typename T, std::size_t N>
+template <typename T, size_t N>
 class PoolAllocator
 {
    private:
-    struct PoolState
+    struct Node
     {
-        T*          pool;
-        std::size_t offset = 0;
-        ~PoolState () { ::operator delete (pool); }
-    };
-    std::shared_ptr<PoolState> state_;
+        T*     data;
+        size_t capacity;
+        size_t used;
+        Node*  next;
 
-    T* pool () const noexcept { return state_ ? state_->pool : nullptr; }
+        explicit Node (size_t count)
+            : data (static_cast<T*> (::operator new (count * sizeof (T)))), capacity (count), used (0), next (nullptr)
+        {
+        }
+
+        ~Node () { ::operator delete (data); }
+    };
+
+    struct Pool
+    {
+        Node* head = nullptr;
+        Node* tail = nullptr;
+
+        Pool ()                       = default;
+        Pool (const Pool&)            = delete;
+        Pool& operator= (const Pool&) = delete;
+
+        T* allocate (size_t count)
+        {
+            if (tail && tail->used + count <= tail->capacity)
+            {
+                T* ptr = tail->data + tail->used;
+                tail->used += count;
+                return ptr;
+            }
+
+            size_t new_cap = tail ? tail->capacity * 2 : N;
+            new_cap        = std::max (new_cap, count);
+
+            auto* chunk = new Node (new_cap);
+            if (tail)
+                tail->next = chunk;
+            else
+                head = chunk;
+            tail = chunk;
+
+            T* ptr     = tail->data;
+            tail->used = count;
+            return ptr;
+        }
+
+        ~Pool ()
+        {
+            auto* cur = head;
+            while (cur)
+            {
+                auto* next = cur->next;
+                delete cur;
+                cur = next;
+            }
+        }
+    };
+
+    std::shared_ptr<Pool> mem;
 
    public:
     using value_type = T;
 
-    PoolAllocator () : state_ (std::make_shared<PoolState> ())
-    {
-        state_->pool = static_cast<T*> (::operator new (N * sizeof (T)));
-        if (!state_->pool)
-            throw std::bad_alloc ();
-    }
+    PoolAllocator () : mem (std::make_shared<Pool> ()) {}
 
     ~PoolAllocator () = default;
 
-    T* allocate (std::size_t size)
-    {
-        if (size != 1 || state_->offset >= N)
-            throw std::bad_alloc ();
-        return &state_->pool[state_->offset++];
-    }
+    T* allocate (size_t count) { return mem->allocate (count); }
 
-    void deallocate (T*, std::size_t) noexcept
-    {
-        // cannot deallocate for 1 element
-    }
+    void deallocate (T* /*unused*/, size_t /*unused*/) noexcept {}
 
     template <typename U>
     struct rebind
@@ -49,38 +90,31 @@ class PoolAllocator
         using other = PoolAllocator<U, N>;
     };
 
-    // rebind construct — отдельный пул для другого типа
     template <typename U>
-    PoolAllocator (const PoolAllocator<U, N>&) : state_ (std::make_shared<PoolState> ())
+    PoolAllocator (const PoolAllocator<U, N>&) : mem (std::make_shared<Pool> ())
     {
-        state_->pool = static_cast<T*> (::operator new (N * sizeof (T), std::nothrow));
-        if (!state_->pool)
-            throw std::bad_alloc ();
     }
 
-    // copy construct — разделяет тот же пул
-    PoolAllocator (const PoolAllocator&) = default;
-    // move construct
-    PoolAllocator (PoolAllocator&&) = default;
-
+    PoolAllocator (const PoolAllocator&)            = default;
+    PoolAllocator (PoolAllocator&&)                 = default;
     PoolAllocator& operator= (const PoolAllocator&) = delete;
 
-    template <typename U, std::size_t M>
+    template <typename U, size_t M>
     bool operator!= (const PoolAllocator<U, M>& other) const noexcept
     {
         return !(*this == other);
     }
 
-    template <typename U, std::size_t M>
+    template <typename U, size_t M>
     bool operator== (const PoolAllocator<U, M>& other) const noexcept
     {
-        return pool () == other.pool ();
+        return mem.get () == other.mem.get ();
     }
 
     using propagate_on_container_copy_assignment = std::true_type;
     using propagate_on_container_move_assignment = std::true_type;
-    using propagate_on_container_swap_assignment = std::true_type;
+    using propagate_on_container_swap            = std::true_type;
 
-    template <typename U, std::size_t M>
+    template <typename U, size_t M>
     friend class PoolAllocator;
 };
