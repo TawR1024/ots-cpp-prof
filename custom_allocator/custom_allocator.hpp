@@ -49,9 +49,13 @@ class PoolAllocator
 
             auto* chunk = new Node (new_cap);
             if (tail)
+            {
                 tail->next = chunk;
+            }
             else
+            {
                 head = chunk;
+            }
             tail = chunk;
 
             T* ptr     = tail->data;
