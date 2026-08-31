@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.31)
 
-set(PROJECT_NAME template-project)
+set(PROJECT_NAME hw4-templates-doxygen)
 
-project(PROJECT_NAME VERSION 0.0.0 LANGUAGES CXX)
+project(${PROJECT_NAME} VERSION 4.0.0 LANGUAGES CXX)
 
 if(PACKAGE_VERSION)
   set(CPACK_PACKAGE_VERSION "${PACKAGE_VERSION}")
@@ -16,11 +16,11 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_library(lib lib.cpp)
+add_library(ip_addr ip_addr.cpp)
 
-add_executable(PROJECT_NAME main.cpp)
-target_link_libraries(PROJECT_NAME PRIVATE lib)
-install(TARGETS PROJECT_NAME RUNTIME DESTINATION bin)
+add_executable(${PROJECT_NAME} main.cpp)
+target_link_libraries(${PROJECT_NAME} PRIVATE ip_addr)
+install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 if(NOT CPACK_DEBIAN_PACKAGE_ARCHITECTURE)
@@ -42,10 +42,10 @@ if(WITH_GTEST)
     enable_testing()
     include(GoogleTest)
 
-    add_executable(lib_test lib_test.cpp)
-    target_link_libraries(lib_test lib GTest::gtest_main
+    add_executable(ip_addr_test ip_addr_test.cpp)
+    target_link_libraries(ip_addr_test GTest::gtest_main
                           GTest::gtest)
-    gtest_discover_tests(lib_test)
+    gtest_discover_tests(ip_addr_test)
   else()
     message(WARNING "GTest not found — tests will not be built")
   endif()
