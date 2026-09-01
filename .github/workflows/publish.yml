@@ -22,30 +22,8 @@ jobs:
         run: doxygen Doxyfile
 
       - name: Deploy to gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          REF_NAME="${{ inputs.ref_name }}"
-
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-          PAGES_DIR=$(mktemp -d)
-
-          # Try to clone existing gh-pages branch; initialise fresh repo if absent.
-          # Use `git -C` instead of `cd` so the workspace stays the current dir
-          # for the relative-free copy step below.
-          git clone --depth=1 --branch gh-pages \
-            "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "$PAGES_DIR" 2>/dev/null || {
-            git init -b gh-pages "$PAGES_DIR"
-            git -C "$PAGES_DIR" remote add origin "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          }
-
-          # Replace old docs for this ref and copy new ones
-          rm -rf "$PAGES_DIR/${REF_NAME}"
-          mkdir -p "$PAGES_DIR/${REF_NAME}"
-          cp -r "${GITHUB_WORKSPACE}/docs/html/"* "$PAGES_DIR/${REF_NAME}/"
-
-          git -C "$PAGES_DIR" add -A
-          git -C "$PAGES_DIR" commit -m "Deploy docs for ${REF_NAME} at ${GITHUB_SHA:0:7}" || echo "Nothing to commit"
-          git -C "$PAGES_DIR" push -u origin gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/html
+          destination_dir: ${{ inputs.ref_name }}
