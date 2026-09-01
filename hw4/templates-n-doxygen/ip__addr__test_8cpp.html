@@ -1,0 +1,289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Otus C++ Professional: Файл ip_addr_test.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Otus C++ Professional
+   </div>
+   <div id="projectbrief">Homework assignments for Otus C++ Professional course</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('ip__addr__test_8cpp.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Классы</a> &#124;
+<a href="#func-members">Функции</a>  </div>
+  <div class="headertitle"><div class="title">Файл ip_addr_test.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="ip__addr_8hpp_source.html">ip_addr.hpp</a>&quot;</code><br />
+<code>#include &lt;cstdint&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &quot;gtest/gtest.h&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Граф включаемых заголовочных файлов для ip_addr_test.cpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="ip__addr__test_8cpp__incl.png" border="0" usemap="#aip__addr__test_8cpp" alt=""/></div>
+<map name="aip__addr__test_8cpp" id="aip__addr__test_8cpp">
+<area shape="rect" title=" " alt="" coords="334,5,463,31"/>
+<area shape="rect" href="ip__addr_8hpp.html" title=" " alt="" coords="350,79,447,104"/>
+<area shape="poly" title=" " alt="" coords="401,31,401,65,396,65,396,31"/>
+<area shape="rect" title=" " alt="" coords="5,152,72,177"/>
+<area shape="poly" title=" " alt="" coords="368,33,242,81,79,149,77,144,240,76,366,28"/>
+<area shape="rect" title=" " alt="" coords="96,152,155,177"/>
+<area shape="poly" title=" " alt="" coords="378,33,160,148,158,143,376,29"/>
+<area shape="rect" title=" " alt="" coords="842,152,905,177"/>
+<area shape="poly" title=" " alt="" coords="412,29,453,66,481,86,512,102,556,118,595,128,665,135,738,138,829,149,828,155,737,143,665,141,594,133,555,123,510,106,479,90,450,70,408,33"/>
+<area shape="rect" title=" " alt="" coords="523,79,627,104"/>
+<area shape="poly" title=" " alt="" coords="428,28,534,71,532,76,426,33"/>
+<area shape="rect" title=" " alt="" coords="658,152,729,177"/>
+<area shape="poly" title=" " alt="" coords="447,101,645,149,644,154,445,107"/>
+<area shape="poly" title=" " alt="" coords="350,104,86,154,85,149,349,98"/>
+<area shape="rect" title=" " alt="" coords="753,152,818,177"/>
+<area shape="poly" title=" " alt="" coords="448,98,739,149,738,154,447,104"/>
+<area shape="rect" title=" " alt="" coords="179,152,250,177"/>
+<area shape="poly" title=" " alt="" coords="370,107,259,149,257,144,368,102"/>
+<area shape="poly" title=" " alt="" coords="354,107,168,154,167,149,353,101"/>
+<area shape="rect" title=" " alt="" coords="274,152,329,177"/>
+<area shape="poly" title=" " alt="" coords="385,106,330,146,327,141,381,102"/>
+<area shape="rect" title=" " alt="" coords="353,152,445,177"/>
+<area shape="poly" title=" " alt="" coords="401,104,401,138,396,138,396,104"/>
+<area shape="rect" title=" " alt="" coords="469,152,529,177"/>
+<area shape="poly" title=" " alt="" coords="416,102,473,142,470,146,413,106"/>
+<area shape="poly" title=" " alt="" coords="448,98,467,101,647,122,727,132,829,149,828,154,726,137,646,128,466,107,447,104"/>
+<area shape="rect" title=" " alt="" coords="553,152,633,177"/>
+<area shape="poly" title=" " alt="" coords="431,102,550,145,548,150,429,107"/>
+</map>
+</div>
+</div>
+<p><a href="ip__addr__test_8cpp_source.html">См. исходные тексты.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Классы</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPPrinter.html">IPPrinter</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Функции</h2></td></tr>
+<tr class="memitem:a0ec78c43e38b7f26e374d397cc82b313" id="r_a0ec78c43e38b7f26e374d397cc82b313"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ip__addr__test_8cpp.html#a0ec78c43e38b7f26e374d397cc82b313">TEST_F</a> (<a class="el" href="classIPPrinter.html">IPPrinter</a>, <a class="el" href="ip__addr_8hpp.html#afd5235ab6d17ce521e2312cc80a317f9">print_string</a>)</td></tr>
+<tr class="separator:a0ec78c43e38b7f26e374d397cc82b313"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f0688a2edef79e0ae48129956c0dfff" id="r_a3f0688a2edef79e0ae48129956c0dfff"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ip__addr__test_8cpp.html#a3f0688a2edef79e0ae48129956c0dfff">TEST_F</a> (<a class="el" href="classIPPrinter.html">IPPrinter</a>, <a class="el" href="ip__addr_8hpp.html#afd5235ab6d17ce521e2312cc80a317f9">print_int8</a>)</td></tr>
+<tr class="separator:a3f0688a2edef79e0ae48129956c0dfff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06fef05825302ea9ecb83d28155bb78a" id="r_a06fef05825302ea9ecb83d28155bb78a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ip__addr__test_8cpp.html#a06fef05825302ea9ecb83d28155bb78a">TEST_F</a> (<a class="el" href="classIPPrinter.html">IPPrinter</a>, <a class="el" href="ip__addr_8hpp.html#afd5235ab6d17ce521e2312cc80a317f9">print_int64</a>)</td></tr>
+<tr class="separator:a06fef05825302ea9ecb83d28155bb78a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a397732ba6b02ffe1ec897a17204ee9f8" id="r_a397732ba6b02ffe1ec897a17204ee9f8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ip__addr__test_8cpp.html#a397732ba6b02ffe1ec897a17204ee9f8">TEST_F</a> (<a class="el" href="classIPPrinter.html">IPPrinter</a>, <a class="el" href="ip__addr_8hpp.html#afd5235ab6d17ce521e2312cc80a317f9">print_vector</a>)</td></tr>
+<tr class="separator:a397732ba6b02ffe1ec897a17204ee9f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Функции</h2>
+<a id="a06fef05825302ea9ecb83d28155bb78a" name="a06fef05825302ea9ecb83d28155bb78a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06fef05825302ea9ecb83d28155bb78a">&#9670;&#160;</a></span>TEST_F() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TEST_F </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classIPPrinter.html">IPPrinter</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="ip__addr_8hpp.html#afd5235ab6d17ce521e2312cc80a317f9">print_int64</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">См. определение в файле <a class="el" href="ip__addr__test_8cpp_source.html">ip_addr_test.cpp</a> строка <a class="el" href="ip__addr__test_8cpp_source.html#l00027">27</a></p>
+
+</div>
+</div>
+<a id="a3f0688a2edef79e0ae48129956c0dfff" name="a3f0688a2edef79e0ae48129956c0dfff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f0688a2edef79e0ae48129956c0dfff">&#9670;&#160;</a></span>TEST_F() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TEST_F </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classIPPrinter.html">IPPrinter</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="ip__addr_8hpp.html#afd5235ab6d17ce521e2312cc80a317f9">print_int8</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">См. определение в файле <a class="el" href="ip__addr__test_8cpp_source.html">ip_addr_test.cpp</a> строка <a class="el" href="ip__addr__test_8cpp_source.html#l00020">20</a></p>
+
+</div>
+</div>
+<a id="a0ec78c43e38b7f26e374d397cc82b313" name="a0ec78c43e38b7f26e374d397cc82b313"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ec78c43e38b7f26e374d397cc82b313">&#9670;&#160;</a></span>TEST_F() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TEST_F </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classIPPrinter.html">IPPrinter</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="ip__addr_8hpp.html#afd5235ab6d17ce521e2312cc80a317f9">print_string</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">См. определение в файле <a class="el" href="ip__addr__test_8cpp_source.html">ip_addr_test.cpp</a> строка <a class="el" href="ip__addr__test_8cpp_source.html#l00013">13</a></p>
+
+</div>
+</div>
+<a id="a397732ba6b02ffe1ec897a17204ee9f8" name="a397732ba6b02ffe1ec897a17204ee9f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a397732ba6b02ffe1ec897a17204ee9f8">&#9670;&#160;</a></span>TEST_F() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TEST_F </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classIPPrinter.html">IPPrinter</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="ip__addr_8hpp.html#afd5235ab6d17ce521e2312cc80a317f9">print_vector</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">См. определение в файле <a class="el" href="ip__addr__test_8cpp_source.html">ip_addr_test.cpp</a> строка <a class="el" href="ip__addr__test_8cpp_source.html#l00034">34</a></p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="ip__addr__test_8cpp.html">ip_addr_test.cpp</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>
