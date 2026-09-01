@@ -32,22 +32,20 @@ jobs:
 
           PAGES_DIR=$(mktemp -d)
 
-          # Try to clone existing gh-pages branch; initialise fresh repo if absent
+          # Try to clone existing gh-pages branch; initialise fresh repo if absent.
+          # Use `git -C` instead of `cd` so the workspace stays the current dir
+          # for the relative-free copy step below.
           git clone --depth=1 --branch gh-pages \
             "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "$PAGES_DIR" 2>/dev/null || {
-            mkdir -p "$PAGES_DIR"
-            cd "$PAGES_DIR"
-            git init
-            git checkout -b gh-pages
-            git remote add origin "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+            git init -b gh-pages "$PAGES_DIR"
+            git -C "$PAGES_DIR" remote add origin "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           }
 
           # Replace old docs for this ref and copy new ones
           rm -rf "$PAGES_DIR/${REF_NAME}"
           mkdir -p "$PAGES_DIR/${REF_NAME}"
-          cp -r docs/html/* "$PAGES_DIR/${REF_NAME}/"
+          cp -r "${GITHUB_WORKSPACE}/docs/html/"* "$PAGES_DIR/${REF_NAME}/"
 
-          cd "$PAGES_DIR"
-          git add -A
-          git commit -m "Deploy docs for ${REF_NAME} at ${GITHUB_SHA:0:7}" || echo "Nothing to commit"
-          git push -u origin gh-pages
+          git -C "$PAGES_DIR" add -A
+          git -C "$PAGES_DIR" commit -m "Deploy docs for ${REF_NAME} at ${GITHUB_SHA:0:7}" || echo "Nothing to commit"
+          git -C "$PAGES_DIR" push -u origin gh-pages
