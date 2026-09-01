@@ -3,3 +3,8 @@
 .vscode
 build
 .cache
+# Doxygen generated docs
+docs/html/
+docs/latex/
+docs/xml/
+.clangd

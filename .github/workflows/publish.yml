@@ -1,0 +1,53 @@
+name: "Publish docs"
+
+on:
+  workflow_call:
+    inputs:
+      ref_name:
+        required: true
+        type: string
+
+jobs:
+  publish_docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install Doxygen
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y doxygen graphviz
+
+      - name: Generate docs
+        run: doxygen Doxyfile
+
+      - name: Deploy to gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          REF_NAME="${{ inputs.ref_name }}"
+
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          PAGES_DIR=$(mktemp -d)
+
+          # Try to clone existing gh-pages branch; initialise fresh repo if absent
+          git clone --depth=1 --branch gh-pages \
+            "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "$PAGES_DIR" 2>/dev/null || {
+            mkdir -p "$PAGES_DIR"
+            cd "$PAGES_DIR"
+            git init
+            git checkout -b gh-pages
+            git remote add origin "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          }
+
+          # Replace old docs for this ref and copy new ones
+          rm -rf "$PAGES_DIR/${REF_NAME}"
+          mkdir -p "$PAGES_DIR/${REF_NAME}"
+          cp -r docs/html/* "$PAGES_DIR/${REF_NAME}/"
+
+          cd "$PAGES_DIR"
+          git add -A
+          git commit -m "Deploy docs for ${REF_NAME} at ${GITHUB_SHA:0:7}" || echo "Nothing to commit"
+          git push -u origin gh-pages

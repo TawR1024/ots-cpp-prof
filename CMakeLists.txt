@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.31)
 
-set(PROJECT_NAME hw4-templates-doxygen)
+set(PROJECT_NAME print_ip)
 
 project(${PROJECT_NAME} VERSION 4.0.0 LANGUAGES CXX)
 
@@ -33,6 +33,28 @@ set(CPACK_PACKAGE_CONTACT ilya.kulakov.4308@gmail.com)
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER
     "Ilya Kulakov <ilya.kulakov.4308@gmail.com>")
 include(CPack)
+
+# ---- Doxygen documentation (optional) ----
+find_package(Doxygen OPTIONAL_COMPONENTS dot)
+if(DOXYGEN_FOUND)
+  message(STATUS "Doxygen found: ${DOXYGEN_VERSION}")
+  set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
+
+  # Generate Doxyfile from our template, substituting paths
+  configure_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile
+    ${DOXYGEN_OUT} @ONLY
+  )
+
+  add_custom_target(docs
+    COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    COMMENT "Generating API documentation with Doxygen"
+    VERBATIM
+  )
+else()
+  message(STATUS "Doxygen not found — docs target will not be available")
+endif()
 
 option(WITH_GTEST "Build GTest-based tests" OFF)
 

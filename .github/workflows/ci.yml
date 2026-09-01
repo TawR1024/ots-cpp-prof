@@ -30,3 +30,13 @@ jobs:
       package_name: hw2-ip-filter
     permissions:
       contents: write
+
+  docs:
+    if: github.ref == 'refs/heads/hw4/templates-n-doxygen'
+    needs: build
+    uses: ./.github/workflows/publish.yml
+    with:
+      ref_name: ${{ github.ref_name }}
+    permissions:
+      contents: write
+
