@@ -27,7 +27,7 @@ jobs:
         id: pkg
         run: |
           SRC=$(ls build/*.deb)
-          DST="${{ inputs.package_name }}-${{ github.ref_name }}-${{ github.run_number }}.deb"
+          DST="${{ inputs.package_name }}.deb"
           mv "$SRC" "$DST"
           echo "FILE=$DST" >> $GITHUB_OUTPUT
 
