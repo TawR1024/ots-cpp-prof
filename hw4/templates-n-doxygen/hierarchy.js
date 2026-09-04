@@ -1,5 +1,7 @@
 var hierarchy =
 [
+    [ "enable_if< cond, T >", "structenable__if.html", null ],
+    [ "enable_if< false, T >", "structenable__if_3_01false_00_01T_01_4.html", null ],
     [ "std::false_type", null, [
       [ "is_container< T, typename >", "structis__container.html", null ]
     ] ],
